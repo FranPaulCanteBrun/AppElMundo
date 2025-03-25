@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base Dark Theme -->
+    <style name="Base.Theme.AppChat.Dark" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/dark_lavender_</item>
+        <item name="colorPrimaryVariant">@color/dark_lavender_</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/dark_teal_200_</item>
+        <item name="colorSecondaryVariant">@color/dark_teal_700_</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.AppChat" parent="Base.Theme.AppChat.Dark" />
+</resources>
