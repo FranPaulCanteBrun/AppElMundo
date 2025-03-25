@@ -19,10 +19,27 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        viewModel.getRegisterResult().observe(this, result -> showToast(result));
+
+        viewModel.getRegisterResult().observe(this, result -> {
+            if (result != null) {
+                showToast(result);
+
+                if (result.equals("Usuario registrado exitosamente")) {
+                    new android.os.Handler().postDelayed(() -> {
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }, 1500);
+                }
+            }
+        });
+
         manejarEventos();
     }
+
 
     private void manejarEventos() {
         // Evento volver a login

@@ -24,27 +24,26 @@ public class RegisterViewModel extends ViewModel {
 
 
     public void register(User user) {
-
         LiveData<String> result = authProvider.signUp(user);
-
 
         result.observeForever(new Observer<String>() {
             @Override
             public void onChanged(String objectId) {
-                if (objectId != null) {
+                Log.d("RegisterViewModel", "Respuesta recibida: " + objectId);
 
-                    registerResult.setValue(objectId);
-                    Log.d("RegisterViewModel", "Usuario registrado con ID: " + objectId);
+                if (objectId != null && objectId.equals("error_email_exist")) {
+                    registerResult.setValue("Ese correo ya está registrado");
+                } else if (objectId != null) {
+                    registerResult.setValue("Usuario registrado exitosamente");
                 } else {
-                    // Registration failed
-                    registerResult.setValue(null);
-                    Log.e("RegisterViewModel", "Error durante el registro.");
+                    registerResult.setValue("Error durante el registro");
                 }
 
                 result.removeObserver(this);
             }
         });
     }
+
 }
 
 
