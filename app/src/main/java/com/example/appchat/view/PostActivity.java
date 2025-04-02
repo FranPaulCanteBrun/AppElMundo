@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -49,6 +50,17 @@ public class PostActivity extends AppCompatActivity {
         setupCategorySpinner();
         setupGalleryLauncher();
         binding.btnPublicar.setOnClickListener(v -> publicarPost());
+
+        binding.btnVolver.bringToFront();
+        binding.btnVolver.setOnClickListener(v -> {
+
+            Intent intent = new Intent(PostActivity.this, HomeActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
+
+
     }
 
     private void setupRecyclerView() {
