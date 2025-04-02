@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -74,10 +76,29 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void showToast(String message) {
-        if (message != null) {
-            Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
+        Log.d("TOAST_DEBUG", "Mensaje recibido: " + message);
+        if (message != null && !message.isEmpty()) {
+            if (message.equalsIgnoreCase("Registro exitoso")) {
+                new AlertDialog.Builder(this)
+                        .setTitle("🎉 Registro Exitoso")
+                        .setMessage("¡Bienvenido a El Mundo! Ya podés iniciar sesión.")
+                        .setCancelable(false)
+                        .setPositiveButton("Ir al login", (dialog, which) -> {
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .show();
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        } else {
+            Toast.makeText(this, "Ocurrió un error inesperado", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     private void setupListenersIndividuales() {
         Drawable errorIcon = ContextCompat.getDrawable(this, R.drawable.ic_error);
