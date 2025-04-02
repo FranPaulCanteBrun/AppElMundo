@@ -1,0 +1,29 @@
+# Android Studio
+.idea/
+*.iml
+
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Logs y temporales
+*.log
+.DS_Store
+local.properties
+
+# Auto-generados
+captures/
+output.json
+.cxx/
+.externalNativeBuild/
+*.apk
+*.ap_
+
+# Keystores (NUNCA subir!)
+*.jks
+*.keystore
+
+# Git
+*.orig
+*.rej
